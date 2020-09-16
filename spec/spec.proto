@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "whatsmyip/spec";
+
+package spec;
+
+service IPService {
+  rpc Resolve(IPRequest) returns (IPReply) {}
+}
+
+message IPRequest {}
+message IPReply { string ip = 1; }
