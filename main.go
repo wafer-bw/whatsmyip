@@ -26,8 +26,10 @@ func marshaller(request *http.Request, reply *spec.IPReply) (body []byte, err er
 	switch request.Header.Get("accept") {
 	case "application/protobuf":
 		return proto.Marshal(reply)
-	default:
+	case "application/json":
 		return json.Marshal(reply)
+	default:
+		return []byte(reply.Ip), nil
 	}
 }
 

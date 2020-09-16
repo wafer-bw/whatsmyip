@@ -23,8 +23,16 @@ func mockRequest(method string, url string, headers map[string]string, body io.R
 	return result, recorder.Result().StatusCode, err
 }
 
-func TestHandlerOkJson(t *testing.T) {
+func TestHandlerOk(t *testing.T) {
 	body, status, err := mockRequest("GET", url, nil, nil)
+	require.NoError(t, err)
+	require.Equal(t, "192.0.2.1", string(body))
+	require.Equal(t, 200, status)
+}
+
+func TestHandlerOkJson(t *testing.T) {
+	headers := map[string]string{"Accept": "application/json"}
+	body, status, err := mockRequest("GET", url, headers, nil)
 	require.NoError(t, err)
 	require.Equal(t, "{\"ip\":\"192.0.2.1\"}", string(body))
 	require.Equal(t, 200, status)
