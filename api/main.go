@@ -1,4 +1,4 @@
-package api
+package main
 
 import (
 	"encoding/json"
@@ -35,11 +35,13 @@ func marshaller(request *http.Request, reply *spec.IPReply) (body []byte, err er
 
 // Handler responds with the IP address of the request
 func Handler(writer http.ResponseWriter, request *http.Request) {
+	log.Println(*request)
 	body, err := marshaller(request, resolver(request))
 	if err != nil {
 		log.Println(err)
 		http.Error(writer, err.Error(), 500)
 	}
+	log.Println(string(body))
 	writer.Write(body)
 }
 
