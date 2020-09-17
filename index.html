@@ -14,14 +14,20 @@
     <div id="main" style="text-align: center;">
         <div id="head">
             <h1><div><a href="https://github.com/wafer-bw/whatsmyip">wafer-bw/whatsmyip</a></div></h1>
-            <div>Golang api which returns your public IP address.</div>
-            <h2>Your public IP address is:</h2>
-            <h3 id="ip"></h3>
+            <div>Golang <a href="/api/ip">API</a> running as a <a href="https://vercel.com/docs/serverless-functions">Vercel Serverless Function</a> which returns your public IP address</div><br>
+            <div style="display: inline-block;">
+                Supports the following <code>accept</code> headers:
+                <ul=>
+                    <li><code>application/json</code></li>
+                    <li><code>application/protobuf</code></li>
+                </ul>
+            </div>
+            <h2>Your public IP address is: <div id="ip"></div></h2>
         </div>
     </div>
 
     <script type="text/javascript">
-        fetch("/api/", { headers: { 'accept': 'application/json'}})
+        fetch("/api/ip", { headers: { 'accept': 'application/json'}})
             .then(response => response.json())
             .then(data => {
                 document.getElementById("ip").innerHTML = data["ip"]
