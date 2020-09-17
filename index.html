@@ -13,7 +13,8 @@
 <body>
     <div id="main">
         <div id="head">
-            <h1 id="h1">Your public IP address is: undetermined</h1>
+            <h1>Public IP Address:</h1>
+            <h2 id="h2"></h2>
         </div>
     </div>
 
@@ -21,8 +22,9 @@
         fetch("/api/", { headers: { 'accept': 'application/json'}})
             .then(response => response.json())
             .then(data => {
-                document.getElementById("h1").innerHTML = `Your public IP address is: ${data["ip"]}`
+                document.getElementById("h2").innerHTML = data["ip"]
             }).catch(err => {
+                document.getElementById("h2").innerHTML = "There was a problem getting your IP address"
                 console.error(err)
             });
     </script>
