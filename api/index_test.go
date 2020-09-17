@@ -4,6 +4,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -44,4 +45,12 @@ func TestHandlerOkProto(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, "\n\t192.0.2.1", string(body))
 	require.Equal(t, 200, status)
+}
+
+func TestGetEnv(t *testing.T) {
+	v := getEnv("WMIPTESTENV", "DEFAULT")
+	require.Equal(t, "DEFAULT", v)
+	os.Setenv("WMIPTESTENV", "NONDEFAULT")
+	v = getEnv("WMIPTESTENV", "DEFAULT")
+	require.Equal(t, "NONDEFAULT", v)
 }
