@@ -22,7 +22,9 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("h1").innerHTML = `Your public IP address is: ${data["ip"]}`
-            }).catch(err => {});
+            }).catch(err => {
+                console.error(err)
+            });
     </script>
 </body>
 
