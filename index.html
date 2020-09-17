@@ -11,10 +11,12 @@
 </head>
 
 <body>
-    <div id="main">
+    <div id="main" style="text-align: center;">
         <div id="head">
-            <h1>Public IP Address:</h1>
-            <h2 id="h2"></h2>
+            <h1><div><a href="https://github.com/wafer-bw/whatsmyip">wafer-bw/whatsmyip</a></div></h1>
+            <div>Golang api which returns your public IP address.</div>
+            <h2>Your public IP address is:</h2>
+            <h3 id="ip"></h3>
         </div>
     </div>
 
@@ -22,11 +24,12 @@
         fetch("/api/", { headers: { 'accept': 'application/json'}})
             .then(response => response.json())
             .then(data => {
-                document.getElementById("h2").innerHTML = data["ip"]
+                document.getElementById("ip").innerHTML = data["ip"]
             }).catch(err => {
-                document.getElementById("h2").innerHTML = "There was a problem getting your IP address"
+                msg = "There was a problem getting your IP address"
+                document.getElementById("ip").innerHTML = msg
                 console.error(err)
-            });
+            })
     </script>
 </body>
 
