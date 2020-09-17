@@ -41,7 +41,6 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		log.Println(err)
 		http.Error(writer, err.Error(), 500)
 	}
-	log.Println(string(body))
 	writer.Write(body)
 }
 
