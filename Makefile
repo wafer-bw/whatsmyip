@@ -8,7 +8,3 @@ protoc:
 test:
 	go test -v -coverprofile=cover.out ./...
 .PHONY: test
-
-run:
-	HTTP_PORT=8000 go run ./api/main.go
-.PHONY: run

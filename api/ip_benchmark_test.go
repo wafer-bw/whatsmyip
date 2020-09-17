@@ -1,4 +1,4 @@
-package handler
+package ip
 
 import (
 	"encoding/json"
