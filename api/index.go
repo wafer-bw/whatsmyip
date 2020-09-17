@@ -6,17 +6,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gorilla/mux"
 	"github.com/wafer-bw/whatsmyip/spec"
 	"google.golang.org/protobuf/proto"
 )
-
-// GetRouter returns a mux router with the supported routes and methods
-func GetRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/", Handler).Methods(http.MethodGet)
-	return r
-}
 
 func resolver(request *http.Request) *spec.IPReply {
 	ip := request.Header.Get("x-forwarded-for")
