@@ -7,36 +7,27 @@
     <meta charset="utf-8">
     <meta name="theme-color" content="#fff" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Returns your public IP address">
+    <meta name="description" content="Golang API running as a Vercel Serverless Function which returns your public IP address">
+    <script src="./js/setIp.js" async></script>
 </head>
 
 <body>
-    <div id="main" style="text-align: center;">
-        <div id="head">
+    <div style="text-align: center;">
+        <div>
             <h1><div><a href="https://github.com/wafer-bw/whatsmyip">wafer-bw/whatsmyip</a></div></h1>
-            <div>Golang <a href="/api/ip">API</a> running as a <a href="https://vercel.com/docs/serverless-functions">Vercel Serverless Function</a> which returns your public IP address</div><br>
+            <h2>Your public IP address is: <div id="ip"></div></h2>
+            <div>
+                Golang <a href="/api/ip">API</a> running as a <a href="https://vercel.com/docs/serverless-functions">Vercel Serverless Function</a> which returns your public IP address
+            </div><br>
             <div style="display: inline-block;">
-                Supports the following <code>accept</code> headers:
-                <ul=>
+                API supports the following <code>accept</code> headers:
+                <ul>
                     <li><code>application/json</code></li>
                     <li><code>application/protobuf</code></li>
                 </ul>
             </div>
-            <h2>Your public IP address is: <div id="ip"></div></h2>
         </div>
     </div>
-
-    <script type="text/javascript">
-        fetch("/api/ip", { headers: { 'accept': 'application/json'}})
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("ip").innerHTML = data["ip"]
-            }).catch(err => {
-                msg = "There was a problem getting your IP address"
-                document.getElementById("ip").innerHTML = msg
-                console.error(err)
-            })
-    </script>
 </body>
 
 </html>
