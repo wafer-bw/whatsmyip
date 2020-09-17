@@ -3,11 +3,9 @@ package api
 import (
 	"io"
 	"io/ioutil"
-	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/require"
 )
 
@@ -19,8 +17,7 @@ func mockRequest(method string, url string, headers map[string]string, body io.R
 	for key, val := range headers {
 		request.Header.Set(key, val)
 	}
-	router := mux.NewRouter()
-	router.HandleFunc("/", Handler).Methods(http.MethodGet)
+	router := getRouter()
 	router.ServeHTTP(recorder, request)
 	result, err := ioutil.ReadAll(recorder.Body)
 	return result, recorder.Result().StatusCode, err
