@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"io"
@@ -17,7 +17,7 @@ func mockRequest(method string, url string, headers map[string]string, body io.R
 	for key, val := range headers {
 		request.Header.Set(key, val)
 	}
-	router := getRouter()
+	router := GetRouter()
 	router.ServeHTTP(recorder, request)
 	result, err := ioutil.ReadAll(recorder.Body)
 	return result, recorder.Result().StatusCode, err
