@@ -1,18 +1,22 @@
-package ip
+package api
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strings"
-	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/wafer-bw/whatsmyip/spec"
 	"google.golang.org/protobuf/proto"
 )
+
+// GetRouter returns the router for the API
+func GetRouter() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/", Handler).Methods(http.MethodGet)
+	return r
+}
 
 func resolver(request *http.Request) *spec.IPReply {
 	ip := request.Header.Get("x-forwarded-for")
@@ -42,31 +46,4 @@ func Handler(writer http.ResponseWriter, request *http.Request) {
 		http.Error(writer, err.Error(), 500)
 	}
 	writer.Write(body)
-}
-
-func getRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/", Handler).Methods(http.MethodGet)
-	return r
-}
-
-func getEnv(key string, def string) string {
-	val, ok := os.LookupEnv(key)
-	if !ok {
-		return def
-	}
-	return val
-}
-
-func main() {
-	p := getEnv("HTTP_PORT", "80")
-	s := &http.Server{
-		Addr:         fmt.Sprintf("0.0.0.0:%s", p),
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 1 * time.Second,
-		IdleTimeout:  1 * time.Minute,
-		Handler:      getRouter(),
-	}
-	log.Printf("Listening on %s", s.Addr)
-	log.Fatal(s.ListenAndServe())
 }

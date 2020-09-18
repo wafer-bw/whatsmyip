@@ -5,7 +5,7 @@ Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/ser
 
 ## Links
 * [Homepage](https://whatsmyip.wafer-bw.vercel.app)
-* [API](https://whatsmyip.wafer-bw.vercel.app/api/ip) which supports the following `accept` headers:
+* [API](https://whatsmyip.wafer-bw.vercel.app/api) which supports the following `accept` headers:
     * `application/json`
     * `application/protobuf`
 
