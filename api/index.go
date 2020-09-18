@@ -11,6 +11,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+// GetRouter returns the router for the API
 func GetRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", Handler).Methods(http.MethodGet)

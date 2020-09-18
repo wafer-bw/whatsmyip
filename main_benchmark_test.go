@@ -17,9 +17,9 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var iterations = 10
+var iterations = 1000
 var maxConcurrent = 50
-var client = http.Client{Timeout: time.Second * 2}
+var client = http.Client{Timeout: time.Millisecond * 500}
 
 func TestMain(m *testing.M) {
 	log.SetOutput(ioutil.Discard)
@@ -27,7 +27,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestBenchmark(t *testing.T) {
-	ports, err := freeport.GetFreePorts(2)
+	ports, err := freeport.GetFreePorts(1)
 	if err != nil {
 		panic(err)
 	}
@@ -39,6 +39,7 @@ func TestBenchmark(t *testing.T) {
 
 	runTests("protobuf", protoTest)
 	runTests("json\t", jsonTest)
+	runTests("text\t", textTest)
 }
 
 func runTests(name string, test func(*sync.WaitGroup, *int32, *int32)) {
@@ -65,7 +66,6 @@ func protoTest(wg *sync.WaitGroup, good *int32, bad *int32) {
 	url := fmt.Sprintf("http://localhost:%s/", os.Getenv("HTTP_PORT"))
 	body, err := getBody(url, headers)
 	if err != nil {
-		fmt.Println(err)
 		atomic.AddInt32(bad, 1)
 		return
 	}
@@ -88,6 +88,16 @@ func jsonTest(wg *sync.WaitGroup, good *int32, bad *int32) {
 	}
 	reply := &spec.IPReply{}
 	err = json.Unmarshal(body, reply)
+	if err != nil {
+		atomic.AddInt32(bad, 1)
+		return
+	}
+	atomic.AddInt32(good, 1)
+}
+
+func textTest(wg *sync.WaitGroup, good *int32, bad *int32) {
+	url := fmt.Sprintf("http://localhost:%s/", os.Getenv("HTTP_PORT"))
+	_, err := getBody(url, nil)
 	if err != nil {
 		atomic.AddInt32(bad, 1)
 		return
