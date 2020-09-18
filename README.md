@@ -11,7 +11,11 @@ Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/ser
 
 ## Usage
 ```bash
+# Clone the repo
 git clone git@github.com:wafer-bw/whatsmyip.git
 cd whatsmyip
+# Run Tests & Benchmarks
 make test
+# Run the API locally
+make run
 ```
