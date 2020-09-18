@@ -2,6 +2,7 @@
 Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/serverless-functions) which returns your public IP address
 
 ![tests](https://github.com/wafer-bw/whatsmyip/workflows/tests/badge.svg)
+![CodeQL](https://github.com/wafer-bw/whatsmyip/workflows/CodeQL/badge.svg)
 
 ## Links
 * [Homepage](https://whatsmyip.wafer-bw.vercel.app)
