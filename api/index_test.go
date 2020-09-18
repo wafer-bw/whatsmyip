@@ -1,8 +1,9 @@
-package ip
+package api
 
 import (
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http/httptest"
 	"os"
 	"testing"
@@ -12,13 +13,18 @@ import (
 
 var url = "http://localhost:1234/"
 
+func TestMain(m *testing.M) {
+	log.SetOutput(ioutil.Discard)
+	os.Exit(m.Run())
+}
+
 func mockRequest(method string, url string, headers map[string]string, body io.Reader) ([]byte, int, error) {
 	recorder := httptest.NewRecorder()
 	request := httptest.NewRequest("GET", url, nil)
 	for key, val := range headers {
 		request.Header.Set(key, val)
 	}
-	router := getRouter()
+	router := GetRouter()
 	router.ServeHTTP(recorder, request)
 	result, err := ioutil.ReadAll(recorder.Body)
 	return result, recorder.Result().StatusCode, err
@@ -45,12 +51,4 @@ func TestHandlerOkProto(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, "\n\t192.0.2.1", string(body))
 	require.Equal(t, 200, status)
-}
-
-func TestGetEnv(t *testing.T) {
-	v := getEnv("WMIPTESTENV", "DEFAULT")
-	require.Equal(t, "DEFAULT", v)
-	os.Setenv("WMIPTESTENV", "NONDEFAULT")
-	v = getEnv("WMIPTESTENV", "DEFAULT")
-	require.Equal(t, "NONDEFAULT", v)
 }

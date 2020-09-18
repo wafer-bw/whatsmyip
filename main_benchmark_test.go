@@ -1,4 +1,4 @@
-package ip
+package main
 
 import (
 	"encoding/json"
@@ -17,7 +17,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-var iterations = 1000
+var iterations = 10
 var maxConcurrent = 50
 var client = http.Client{Timeout: time.Second * 2}
 
@@ -65,6 +65,7 @@ func protoTest(wg *sync.WaitGroup, good *int32, bad *int32) {
 	url := fmt.Sprintf("http://localhost:%s/", os.Getenv("HTTP_PORT"))
 	body, err := getBody(url, headers)
 	if err != nil {
+		fmt.Println(err)
 		atomic.AddInt32(bad, 1)
 		return
 	}
