@@ -29,11 +29,11 @@ vercel login
 
 ## Usage
 ```bash
-# Run the webpage & API as they would when deployed to Vercel
+# Run the webpage & API
 make run
 # Run tests & benchmarks
 make test
-# Run just the API locally
+# Run the API only
 make api
 # Update coverage badge
 make coverage
