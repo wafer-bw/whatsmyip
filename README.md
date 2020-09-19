@@ -4,6 +4,7 @@ Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/ser
 ![tests](https://github.com/wafer-bw/whatsmyip/workflows/tests/badge.svg)
 <a href='https://github.com/jpoles1/gopherbadger' target='_blank'>![gopherbadger-tag-do-not-edit](https://img.shields.io/badge/Coverage-93%25-brightgreen.svg?longCache=true&style=flat)</a>
 ![CodeQL](https://github.com/wafer-bw/whatsmyip/workflows/CodeQL/badge.svg)
+<a href='https://goreportcard.com/report/github.com/wafer-bw/whatsmyip' target='_blank'>![go report](https://goreportcard.com/badge/github.com/wafer-bw/whatsmyip)</a>
 
 ## Links
 * [Homepage](https://whatsmyip.wafer-bw.vercel.app)
