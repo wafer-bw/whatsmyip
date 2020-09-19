@@ -7,8 +7,8 @@ Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/ser
 <a href='https://goreportcard.com/report/github.com/wafer-bw/whatsmyip' target='_blank'>![go report](https://goreportcard.com/badge/github.com/wafer-bw/whatsmyip)</a>
 
 ## Links
-* Homepage - https://whatsmyip.wafer-bw.vercel.app
-* API - https://whatsmyip.wafer-bw.vercel.app/api - supports the following `accept` headers:
+* [Homepage](https://whatsmyip.wafer-bw.vercel.app)
+* [API](https://whatsmyip.wafer-bw.vercel.app/api) - supports the following `accept` headers:
     * `application/json`
     * `application/protobuf`
 
