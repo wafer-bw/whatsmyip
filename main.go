@@ -7,7 +7,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/gorilla/mux"
 	"github.com/wafer-bw/whatsmyip/api"
 )
 
