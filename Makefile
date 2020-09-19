@@ -9,6 +9,14 @@ test:
 	go test -v -coverprofile=cover.out ./...
 .PHONY: test
 
-run:
+api:
 	go run main.go
+.PHONY: api
+
+run:
+	vercel dev
 .PHONY: run
+
+coverage:
+	gopherbadger -md="README.md" -png=false -prefix ""
+.PHONY: coverage
