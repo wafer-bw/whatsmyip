@@ -20,8 +20,6 @@ func getEnv(key string, def string) string {
 }
 
 func main() {
-	r := mux.NewRouter()
-	r.HandleFunc("/", api.Handler).Methods(http.MethodGet)
 	p := getEnv("HTTP_PORT", "8000")
 	s := &http.Server{
 		Addr:         fmt.Sprintf("0.0.0.0:%s", p),
