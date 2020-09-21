@@ -11,11 +11,14 @@ Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/ser
 * [API](https://whatsmyip.wafer-bw.vercel.app/api) - supports the following `accept` headers:
     * `application/json`
     * `application/protobuf`
+    * defaults to `text/plain`
 
 ## Prerequisites
-* [Go](https://golang.org/)
-* [Node.js and npm](https://nodejs.org/en/) (for running [Vercel](https://vercel.com/))
-* [protoc-gen-go](https://developers.google.com/protocol-buffers/docs/gotutorial) (if you wish to change the `protobuf` API contract within [./spec](./spec)).
+* Required
+    * [Go](https://golang.org/)
+* Optional
+    * [Node.js and npm](https://nodejs.org/en/) for running/deploying with [Vercel](https://vercel.com/)
+    * [protoc-gen-go](https://developers.google.com/protocol-buffers/docs/gotutorial) for updating the `protobuf` API contract found [here](./spec/spec.proto)
 
 ## Setup
 ```bash
@@ -25,10 +28,13 @@ cd whatsmyip
 # Get Vercel and login
 npm i -g vercel
 vercel login
+# Link project to your vercel account
+vercel
 ```
 
 ## Usage
-```bash
+If you don't have `make`, you can just run the commands found in the [Makefile](./Makefile) directly
+```sh
 # Run the webpage & API
 make run
 # Run tests & benchmarks
@@ -40,3 +46,6 @@ make coverage
 # Update protobuf API contract
 make protoc
 ```
+
+## References
+* I learned a lot of this from [@codeallthethingz](https://github.com/codeallthethingz)
