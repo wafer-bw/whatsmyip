@@ -21,7 +21,7 @@ Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/ser
     * [protoc-gen-go](https://developers.google.com/protocol-buffers/docs/gotutorial) for updating the `protobuf` API contract found [here](./spec/spec.proto)
 
 ## Setup
-```bash
+```sh
 # Clone the repo and enter directory
 git clone git@github.com:wafer-bw/whatsmyip.git
 cd whatsmyip
