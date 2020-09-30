@@ -47,5 +47,12 @@ make coverage
 make protoc
 ```
 
+If you have issues with `make protoc`:
+```sh
+go get github.com/golang/protobuf/protoc-gen-go
+export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:/usr/local/go/bin
+```
+
 ## References
 * I learned a lot of this from [@codeallthethingz](https://github.com/codeallthethingz)
