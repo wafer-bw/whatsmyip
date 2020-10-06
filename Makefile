@@ -6,7 +6,7 @@ protoc:
 .PHONY: protoc
 
 test:
-	go test -v -coverprofile=cover.out ./...
+	go test -coverprofile=cover.out ./...
 .PHONY: test
 
 api:
