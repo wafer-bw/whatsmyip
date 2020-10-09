@@ -7,11 +7,7 @@
 package spec
 
 import (
-	context "context"
 	proto "github.com/golang/protobuf/proto"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -120,13 +116,9 @@ var file_spec_spec_proto_rawDesc = []byte{
 	0x0a, 0x0f, 0x73, 0x70, 0x65, 0x63, 0x2f, 0x73, 0x70, 0x65, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x12, 0x04, 0x73, 0x70, 0x65, 0x63, 0x22, 0x0b, 0x0a, 0x09, 0x49, 0x50, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x22, 0x19, 0x0a, 0x07, 0x49, 0x50, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x32,
-	0x38, 0x0a, 0x09, 0x49, 0x50, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2b, 0x0a, 0x07,
-	0x52, 0x65, 0x73, 0x6f, 0x6c, 0x76, 0x65, 0x12, 0x0f, 0x2e, 0x73, 0x70, 0x65, 0x63, 0x2e, 0x49,
-	0x50, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x73, 0x70, 0x65, 0x63, 0x2e,
-	0x49, 0x50, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x10, 0x5a, 0x0e, 0x77, 0x68, 0x61,
-	0x74, 0x73, 0x6d, 0x79, 0x69, 0x70, 0x2f, 0x73, 0x70, 0x65, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x0e, 0x0a, 0x02, 0x69, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x42,
+	0x10, 0x5a, 0x0e, 0x77, 0x68, 0x61, 0x74, 0x73, 0x6d, 0x79, 0x69, 0x70, 0x2f, 0x73, 0x70, 0x65,
+	0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -147,10 +139,8 @@ var file_spec_spec_proto_goTypes = []interface{}{
 	(*IPReply)(nil),   // 1: spec.IPReply
 }
 var file_spec_spec_proto_depIdxs = []int32{
-	0, // 0: spec.IPService.Resolve:input_type -> spec.IPRequest
-	1, // 1: spec.IPService.Resolve:output_type -> spec.IPReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -195,7 +185,7 @@ func file_spec_spec_proto_init() {
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   0,
 		},
 		GoTypes:           file_spec_spec_proto_goTypes,
 		DependencyIndexes: file_spec_spec_proto_depIdxs,
@@ -205,84 +195,4 @@ func file_spec_spec_proto_init() {
 	file_spec_spec_proto_rawDesc = nil
 	file_spec_spec_proto_goTypes = nil
 	file_spec_spec_proto_depIdxs = nil
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConnInterface
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion6
-
-// IPServiceClient is the client API for IPService service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type IPServiceClient interface {
-	Resolve(ctx context.Context, in *IPRequest, opts ...grpc.CallOption) (*IPReply, error)
-}
-
-type iPServiceClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewIPServiceClient(cc grpc.ClientConnInterface) IPServiceClient {
-	return &iPServiceClient{cc}
-}
-
-func (c *iPServiceClient) Resolve(ctx context.Context, in *IPRequest, opts ...grpc.CallOption) (*IPReply, error) {
-	out := new(IPReply)
-	err := c.cc.Invoke(ctx, "/spec.IPService/Resolve", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// IPServiceServer is the server API for IPService service.
-type IPServiceServer interface {
-	Resolve(context.Context, *IPRequest) (*IPReply, error)
-}
-
-// UnimplementedIPServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedIPServiceServer struct {
-}
-
-func (*UnimplementedIPServiceServer) Resolve(context.Context, *IPRequest) (*IPReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Resolve not implemented")
-}
-
-func RegisterIPServiceServer(s *grpc.Server, srv IPServiceServer) {
-	s.RegisterService(&_IPService_serviceDesc, srv)
-}
-
-func _IPService_Resolve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IPRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IPServiceServer).Resolve(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/spec.IPService/Resolve",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IPServiceServer).Resolve(ctx, req.(*IPRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _IPService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "spec.IPService",
-	HandlerType: (*IPServiceServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Resolve",
-			Handler:    _IPService_Resolve_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "spec/spec.proto",
 }
