@@ -1,6 +1,6 @@
 protoc:
 	rm -f spec/*.pb.go
-	protoc spec/spec.proto --go_out=plugins=grpc:spec --experimental_allow_proto3_optional
+	protoc spec/spec.proto --go_out=spec
 	mv spec/whatsmyip/spec/* spec
 	rm -rf spec/whatsmyip
 .PHONY: protoc
