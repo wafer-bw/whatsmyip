@@ -1,5 +1,5 @@
 # whatsmyip
-Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/serverless-functions) which returns your public IP address
+Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/serverless-functions/introduction) which returns your public IP address
 
 ![tests](https://github.com/wafer-bw/whatsmyip/workflows/tests/badge.svg)
 <a href='https://github.com/jpoles1/gopherbadger' target='_blank'>![gopherbadger-tag-do-not-edit](https://img.shields.io/badge/Coverage-94%25-brightgreen.svg?longCache=true&style=flat)</a>
