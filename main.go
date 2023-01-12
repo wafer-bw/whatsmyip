@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"time"
@@ -21,7 +21,7 @@ func getEnv(key string, def string) string {
 func main() {
 	p := getEnv("HTTP_PORT", "8000")
 	s := &http.Server{
-		Addr:         fmt.Sprintf("0.0.0.0:%s", p),
+		Addr:         net.JoinHostPort("0.0.0.0", p),
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 1 * time.Second,
 		IdleTimeout:  1 * time.Minute,
