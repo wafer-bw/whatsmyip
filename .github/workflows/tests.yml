@@ -23,36 +23,19 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Get dependencies
-      run: |
-        go get -v -t -d ./...
-        if [ -f Gopkg.toml ]; then
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-            dep ensure
-        fi
+      run: go mod download
 
     - name: Build
       run: go build -v ./...
 
     - name: Test
-      run: go test -v -coverprofile=cover.out ./...
+      run: go test -shuffle=on -v -count=1 -race -failfast -timeout=30s -short -covermode=atomic -coverprofile=coverage.out ./...
 
-    - name: Extract Branch Name
-      run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF##*/})"
+    - name: Convert coverage to lcov
+      uses: jandelgado/gcov2lcov-action@v1.0.9
 
-    - name: Create coverage variable
-      if: env.BRANCH != 'master'
-      run: |
-        COVER=$(go test -v -coverprofile=cover.out ./... | grep -v '===' | grep -v '\-\-\-' 2>&1)
-        COVER="${COVER//'%'/'%25'}"
-        COVER="${COVER//$'\n'/'%0A'}"
-        COVER="${COVER//$'\r'/'%0D'}"
-        echo "::set-env name=COVERAGE::$COVER"
-        
-    - name: comment PR
-      if: env.BRANCH != 'master'
-      uses: unsplash/comment-on-pr@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
       with:
-        msg: "<b>Coverage Report</b><br>\n```text\n${{ env.COVERAGE }}\n```"
-        check_for_duplicate_msg: true
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: coverage.lcov
