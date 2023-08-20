@@ -1,9 +1,11 @@
 package main
 
+// TODO: this isn't a benchmark file - refactor & rename.
+
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -22,7 +24,7 @@ var maxConcurrent = 50
 var client = http.Client{Timeout: time.Millisecond * 500}
 
 func TestMain(m *testing.M) {
-	log.SetOutput(ioutil.Discard)
+	log.SetOutput(io.Discard)
 	os.Exit(m.Run())
 }
 
@@ -31,7 +33,7 @@ func TestBenchmark(t *testing.T) {
 	if err != nil {
 		panic(err)
 	}
-	os.Setenv("HTTP_PORT", fmt.Sprintf("%d", ports[0]))
+	t.Setenv("HTTP_PORT", fmt.Sprintf("%d", ports[0]))
 
 	go func() {
 		main()
@@ -118,5 +120,6 @@ func getBody(url string, headers map[string]string) ([]byte, error) {
 		return nil, err
 	}
 	defer response.Body.Close()
-	return ioutil.ReadAll(response.Body)
+
+	return io.ReadAll(response.Body)
 }

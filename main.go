@@ -10,23 +10,29 @@ import (
 	"github.com/wafer-bw/whatsmyip/api"
 )
 
-func getEnv(key string, def string) string {
-	val, ok := os.LookupEnv(key)
-	if !ok {
-		return def
-	}
-	return val
-}
+var (
+	host         = "0.0.0.0"
+	defaultPort  = "8000"
+	readTimeout  = 5 * time.Second
+	writeTimeout = 1 * time.Second
+	idleTimeout  = 1 * time.Minute
+	portEnv      = "HTTP_PORT"
+)
 
 func main() {
-	p := getEnv("HTTP_PORT", "8000")
+	port := os.Getenv(portEnv)
+	if port == "" {
+		port = defaultPort
+	}
+
 	s := &http.Server{
-		Addr:         net.JoinHostPort("0.0.0.0", p),
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 1 * time.Second,
-		IdleTimeout:  1 * time.Minute,
+		Addr:         net.JoinHostPort(host, port),
+		ReadTimeout:  readTimeout,
+		WriteTimeout: writeTimeout,
+		IdleTimeout:  idleTimeout,
 		Handler:      api.GetRouter(),
 	}
-	log.Printf("Listening on %s", s.Addr)
+
+	log.Printf("listening on %s", s.Addr)
 	log.Fatal(s.ListenAndServe())
 }

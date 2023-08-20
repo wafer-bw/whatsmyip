@@ -11,7 +11,7 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// GetRouter returns the router for the API
+// GetRouter returns the router for the API.
 func GetRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/", Handler).Methods(http.MethodGet)
@@ -26,10 +26,10 @@ func resolver(request *http.Request) *spec.IPReply {
 	return &spec.IPReply{Ip: ip}
 }
 
-func respond(w http.ResponseWriter, r *http.Request, body []byte, err error) {
+func respond(w http.ResponseWriter, _ *http.Request, body []byte, err error) {
 	switch err {
 	case nil:
-		w.Write(body)
+		_, _ = w.Write(body)
 	default:
 		log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -55,7 +55,7 @@ func marshal(w http.ResponseWriter, r *http.Request, reply *spec.IPReply) (body 
 	}
 }
 
-// Handler responds with the IP address of the request
+// Handler responds with the IP address of the request.
 func Handler(w http.ResponseWriter, r *http.Request) {
 	log.Println(*r)
 	body, err := marshal(w, r, resolver(r))
