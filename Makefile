@@ -9,6 +9,14 @@ test:
 	go test -coverprofile=cover.out ./...
 .PHONY: test
 
+benchmark:
+	go test -run=- -benchmem -bench . github.com/wafer-bw/whatsmyip/...
+.PHONY: benchmark
+
+lint:
+	go run github.com/golangci/golangci-lint/cmd/golangci-lint run
+.PHONY: lint
+
 api:
 	go run main.go
 .PHONY: api
@@ -16,7 +24,3 @@ api:
 run:
 	vercel dev
 .PHONY: run
-
-coverage:
-	gopherbadger -md="README.md" -png=false -prefix ""
-.PHONY: coverage
