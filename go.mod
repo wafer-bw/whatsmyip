@@ -7,7 +7,6 @@ toolchain go1.21.0
 require (
 	github.com/golangci/golangci-lint v1.54.1
 	github.com/gorilla/mux v1.8.0
-	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/tools v0.12.1-0.20230815132531-74c255bcf846
 	golang.org/x/vuln v1.0.1

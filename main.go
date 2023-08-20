@@ -7,10 +7,11 @@ import (
 	"os"
 	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/wafer-bw/whatsmyip/api"
 )
 
-var (
+const (
 	host         = "0.0.0.0"
 	defaultPort  = "8000"
 	readTimeout  = 5 * time.Second
@@ -25,14 +26,17 @@ func main() {
 		port = defaultPort
 	}
 
-	s := &http.Server{
+	router := mux.NewRouter()
+	router.HandleFunc("/", api.Handler).Methods(http.MethodGet)
+
+	server := &http.Server{
 		Addr:         net.JoinHostPort(host, port),
 		ReadTimeout:  readTimeout,
 		WriteTimeout: writeTimeout,
 		IdleTimeout:  idleTimeout,
-		Handler:      api.GetRouter(),
+		Handler:      router,
 	}
 
-	log.Printf("listening on %s", s.Addr)
-	log.Fatal(s.ListenAndServe())
+	log.Printf("listening on %s", server.Addr)
+	log.Fatal(server.ListenAndServe())
 }
