@@ -51,9 +51,11 @@ func identifyIP(r *http.Request) (*spec.IPReply, error) {
 func marshalIP(accept string, reply *spec.IPReply) (string, []byte, error) {
 	switch accept {
 	case "application/protobuf":
-		return accept, proto.Marshal(reply)
+		b, err := proto.Marshal(reply)
+		return accept, b, err
 	case "application/json":
-		return accept, json.Marshal(reply)
+		b, err := json.Marshal(reply)
+		return accept, b, err
 	default:
 		return "text/plain", []byte(reply.Ip), nil
 	}
