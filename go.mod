@@ -7,7 +7,6 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/tools v0.12.1-0.20230815132531-74c255bcf846
-	golang.org/x/vuln v1.0.1
 	google.golang.org/protobuf v1.31.0
 )
 
