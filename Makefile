@@ -3,11 +3,24 @@ protoc:
 	protoc spec/spec.proto --go_out=spec
 	mv spec/whatsmyip/spec/* spec
 	rm -rf spec/whatsmyip
+	make format
 .PHONY: protoc
 
 test:
 	go test -coverprofile=cover.out ./...
 .PHONY: test
+
+benchmark:
+	go test -run=- -benchmem -bench . github.com/wafer-bw/whatsmyip/...
+.PHONY: benchmark
+
+lint:
+	go run github.com/golangci/golangci-lint/cmd/golangci-lint run
+.PHONY: lint
+
+format:
+	go run golang.org/x/tools/cmd/goimports@latest -w .
+.PHONY: format
 
 api:
 	go run main.go
@@ -16,7 +29,3 @@ api:
 run:
 	vercel dev
 .PHONY: run
-
-coverage:
-	gopherbadger -md="README.md" -png=false -prefix ""
-.PHONY: coverage

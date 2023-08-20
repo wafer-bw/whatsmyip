@@ -1,10 +1,7 @@
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 version: 2
 updates:
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "14:00" # 02:00pm UTC
+      interval: "monthly"
     target-branch: "master"
