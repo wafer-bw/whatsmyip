@@ -1,5 +1,5 @@
 # whatsmyip
-Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/serverless-functions/introduction) which returns your public IP address
+Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/functions/serverless-functions) which returns your public IP address
 
 [![Coverage Status](https://coveralls.io/repos/github/wafer-bw/whatsmyip/badge.svg?branch=master)](https://coveralls.io/github/wafer-bw/whatsmyip?branch=master)
 <a href='https://goreportcard.com/report/github.com/wafer-bw/whatsmyip' target='_blank'>![go report](https://goreportcard.com/badge/github.com/wafer-bw/whatsmyip)</a>
@@ -43,6 +43,12 @@ make api
 make coverage
 # Update protobuf API contract
 make protoc
+# Run benchmarks
+make benchmark
+# Run formatting
+make format
+# Run linting
+make lint
 ```
 
 If you have issues with `make protoc`:
