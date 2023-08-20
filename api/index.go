@@ -57,7 +57,6 @@ func marshal(w http.ResponseWriter, r *http.Request, reply *spec.IPReply) (body 
 
 // Handler responds with the IP address of the request.
 func Handler(w http.ResponseWriter, r *http.Request) {
-	log.Println(*r)
 	body, err := marshal(w, r, resolver(r))
 	respond(w, r, body, err)
 }
