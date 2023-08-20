@@ -2,7 +2,6 @@
 Golang API running as a [Vercel Serverless Function](https://vercel.com/docs/serverless-functions/introduction) which returns your public IP address
 
 [![Coverage Status](https://coveralls.io/repos/github/wafer-bw/whatsmyip/badge.svg?branch=master)](https://coveralls.io/github/wafer-bw/whatsmyip?branch=master)
-![CodeQL](https://github.com/wafer-bw/whatsmyip/workflows/CodeQL/badge.svg)
 <a href='https://goreportcard.com/report/github.com/wafer-bw/whatsmyip' target='_blank'>![go report](https://goreportcard.com/badge/github.com/wafer-bw/whatsmyip)</a>
 
 ## Links
