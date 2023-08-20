@@ -20,14 +20,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	accept := strings.ToLower(r.Header.Get("accept"))
 
-	body, err := marshalIP(accept, reply)
+	contentType, body, err := marshalIP(accept, reply)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-	contentType := accept
-	if contentType == "" {
-		contentType = "text/plain"
 	}
 
 	w.Header().Set("Content-Type", contentType)
@@ -50,17 +45,19 @@ func identifyIP(r *http.Request) (*spec.IPReply, error) {
 	return &spec.IPReply{Ip: ip}, nil
 }
 
-// marshalIP reply to bytes based on the request accept string.
+// marshalIP reply to bytes and a content-type string based on provided accept string.
 //
 // If accept is blank then reply.Ip is returned as text/plain.
-func marshalIP(accept string, reply *spec.IPReply) ([]byte, error) {
+func marshalIP(accept string, reply *spec.IPReply) (string, []byte, error) {
 	switch accept {
 	case "application/protobuf":
-		return proto.Marshal(reply)
+		b, err := proto.Marshal(reply)
+		return accept, b, err
 	case "application/json":
-		return json.Marshal(reply)
+		b, err := json.Marshal(reply)
+		return accept, b, err
 	default:
-		return []byte(reply.Ip), nil
+		return "text/plain", []byte(reply.Ip), nil
 	}
 }
 
