@@ -3,6 +3,7 @@ protoc:
 	protoc spec/spec.proto --go_out=spec
 	mv spec/whatsmyip/spec/* spec
 	rm -rf spec/whatsmyip
+	make format
 .PHONY: protoc
 
 test:
@@ -16,6 +17,10 @@ benchmark:
 lint:
 	go run github.com/golangci/golangci-lint/cmd/golangci-lint run
 .PHONY: lint
+
+format:
+	go run golang.org/x/tools/cmd/goimports@latest -w .
+.PHONY: format
 
 api:
 	go run main.go
