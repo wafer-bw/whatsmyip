@@ -1,6 +1,7 @@
 package api
 
 import (
+	"net"
 	"encoding/json"
 	"net/http"
 	"strings"
@@ -36,7 +37,7 @@ func identifyIP(r *http.Request) (*spec.IPReply, error) {
 		ip = r.Header.Get("x-forwarded-for")
 	}
 	if ip == "" {
-		ip = strings.Split(r.RemoteAddr, ":")[0]
+		ip, _, _ = net.SplitHostPort(r.RemoteAddr)
 	}
 	if ip == "" {
 		return nil, ErrNoIP
