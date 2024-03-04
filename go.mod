@@ -1,6 +1,8 @@
 module github.com/wafer-bw/whatsmyip
 
-go 1.20
+go 1.21
+
+toolchain go1.21.7
 
 require (
 	github.com/golangci/golangci-lint v1.56.2
