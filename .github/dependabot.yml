@@ -5,3 +5,7 @@ updates:
     schedule:
       interval: "monthly"
     target-branch: "master"
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"

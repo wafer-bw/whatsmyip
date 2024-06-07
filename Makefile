@@ -8,6 +8,7 @@ protoc:
 
 test:
 	go test -coverprofile=cover.out ./...
+	go tool cover -func=cover.out | grep "total:" | grep "(statements)"
 .PHONY: test
 
 benchmark:
