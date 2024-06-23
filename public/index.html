@@ -8,7 +8,6 @@
     <meta name="theme-color" content="#fff" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Golang API running as a Vercel Serverless Function which returns your public IP address">
-    <script src="./js/setIp.js" async></script>
 </head>
 
 <body>
@@ -28,6 +27,17 @@
             </div>
         </div>
     </div>
+    <script>
+        fetch("/api", { headers: { 'accept': 'application/json' } })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ip").innerHTML = data["ip"]
+            }).catch(err => {
+                msg = "There was a problem getting your IP address"
+                document.getElementById("ip").innerHTML = msg
+                console.error(err)
+            })
+    </script>
 </body>
 
 </html>
