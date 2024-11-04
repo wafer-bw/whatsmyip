@@ -6,8 +6,8 @@ require (
 	github.com/golangci/golangci-lint v1.61.0
 	github.com/gorilla/mux v1.8.1
 	github.com/stretchr/testify v1.9.0
-	golang.org/x/tools v0.25.0
-	google.golang.org/protobuf v1.34.2
+	golang.org/x/tools v0.26.0
+	google.golang.org/protobuf v1.35.1
 )
 
 require (
@@ -179,7 +179,7 @@ require (
 	golang.org/x/exp/typeparams v0.0.0-20240314144324-c7f7c6466f7f // indirect
 	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.25.0 // indirect
+	golang.org/x/sys v0.26.0 // indirect
 	golang.org/x/text v0.18.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
