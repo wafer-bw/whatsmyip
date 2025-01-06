@@ -1,52 +1,52 @@
 run:
-  go: "1.21"
+  go: "1.22"
 linters:
   enable:
-    - govet             # https://pkg.go.dev/cmd/vet
-    - asciicheck        # https://github.com/tdakkota/asciicheck
-    - bidichk           # https://github.com/breml/bidichk
-    - bodyclose         # https://github.com/timakin/bodyclose
-    - containedctx      # https://github.com/sivchari/containedctx
-    - durationcheck     # https://github.com/charithe/durationcheck
-    - errname           # https://github.com/Antonboom/errname
-    - errorlint         # https://github.com/polyfloyd/go-errorlint
-    - forcetypeassert   # https://github.com/gostaticanalysis/forcetypeassert
-    - goconst           # https://github.com/jgautheron/goconst
-    - testpackage       # https://github.com/maratori/testpackage
-    - gomnd             # https://github.com/tommy-muehle/go-mnd
-    - makezero          # https://github.com/ashanbrown/makezero
-    - nilerr            # https://github.com/gostaticanalysis/nilerr
-    - nilnil            # https://github.com/Antonboom/nilnil
-    - nlreturn          # https://github.com/ssgreg/nlreturn
-    - prealloc          # https://github.com/alexkohler/prealloc
-    - predeclared       # https://github.com/nishanths/predeclared
-    - rowserrcheck      # https://github.com/jingyugao/rowserrcheck
-    - sqlclosecheck     # https://github.com/ryanrolds/sqlclosecheck
-    - tenv              # https://github.com/sivchari/tenv
-    - unconvert         # https://github.com/mdempsky/unconvert
-    - unparam           # https://github.com/mvdan/unparam
-    - wastedassign      # https://github.com/sanposhiho/wastedassign
-    - whitespace        # https://github.com/ultraware/whitespace
-    - nolintlint        # https://github.com/golangci/golangci-lint/blob/master/pkg/golinters/nolintlint
-    - tparallel         # https://github.com/moricho/tparallel
-    - cyclop            # https://golangci-lint.run/usage/linters/#cyclop
-    - gocyclo           # https://github.com/fzipp/gocyclo
-    - gocognit          # https://github.com/uudashr/gocognit
-    - godot             # https://github.com/tetafro/godot
-    - gocritic          # https://github.com/go-critic/go-critic
-    - misspell          # https://github.com/client9/misspell
-    - nakedret          # https://github.com/alexkohler/nakedret
-    - nestif            # https://github.com/nakabonne/nestif
-    - dogsled           # https://github.com/alexkohler/dogsled
-    - exportloopref     # https://github.com/kyoh86/exportloopref
-    - dupword           # https://github.com/Abirdcfly/dupword
-    - gochecknoinits    # https://github.com/leighmcculloch/gochecknoinits
-    - gosec             # https://github.com/securego/gosec
-    - tagliatelle       # https://github.com/ldez/tagliatelle
-    - nosprintfhostport # https://github.com/stbenjam/no-sprintf-host-port
-    - funlen            # https://github.com/ultraware/funlen
-    - revive            # https://golangci-lint.run/usage/linters/#revive
-    - exhaustive        # https://github.com/nishanths/exhaustive
+    - govet
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - durationcheck
+    - errname
+    - errorlint
+    - forcetypeassert
+    - goconst
+    - testpackage
+    - mnd
+    - makezero
+    - nilerr
+    - nilnil
+    - nlreturn
+    - prealloc
+    - predeclared
+    - rowserrcheck
+    - sqlclosecheck
+    - tenv
+    - unconvert
+    - unparam
+    - wastedassign
+    - whitespace
+    - nolintlint
+    - tparallel
+    - cyclop
+    - gocyclo
+    - gocognit
+    - godot
+    - gocritic
+    - misspell
+    - nakedret
+    - nestif
+    - dogsled
+    - exportloopref
+    - dupword
+    - gochecknoinits
+    - gosec
+    - tagliatelle
+    - nosprintfhostport
+    - funlen
+    - revive
+    - exhaustive
 
 linters-settings:
   nestif:
