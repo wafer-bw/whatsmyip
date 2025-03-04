@@ -1,5 +1,5 @@
 run:
-  go: "1.22"
+  go: "1.24"
 linters:
   enable:
     - govet
@@ -22,7 +22,7 @@ linters:
     - predeclared
     - rowserrcheck
     - sqlclosecheck
-    - tenv
+    - usetesting
     - unconvert
     - unparam
     - wastedassign
@@ -38,7 +38,7 @@ linters:
     - nakedret
     - nestif
     - dogsled
-    - exportloopref
+    - copyloopvar
     - dupword
     - gochecknoinits
     - gosec
