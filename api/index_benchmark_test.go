@@ -14,22 +14,21 @@ func BenchmarkHandler(b *testing.B) {
 	r := httptest.NewRequest(http.MethodGet, "/", nil)
 
 	b.Run("text", func(b *testing.B) {
-		b.ResetTimer()
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			handler.ServeHTTP(w, r)
 		}
 	})
 
 	r.Header.Set("Accept", "application/protobuf")
 	b.Run("protobuf", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			handler.ServeHTTP(w, r)
 		}
 	})
 
 	r.Header.Set("Accept", "application/json")
 	b.Run("json", func(b *testing.B) {
-		for i := 0; i < b.N; i++ {
+		for b.Loop() {
 			handler.ServeHTTP(w, r)
 		}
 	})
