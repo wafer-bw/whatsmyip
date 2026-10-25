@@ -16,7 +16,7 @@ func TestPage(t *testing.T) {
 		recorder := httptest.NewRecorder()
 		http.HandlerFunc(api.Page).ServeHTTP(recorder, request)
 		resp := recorder.Result()
-		defer resp.Body.Close()
+		defer func() { _ = resp.Body.Close() }()
 		body, err := io.ReadAll(resp.Body)
 		require.NoError(t, err)
 		require.Equal(t, "text/html; charset=utf-8", resp.Header.Get("content-type"))
@@ -30,9 +30,18 @@ func TestPage(t *testing.T) {
 		recorder := httptest.NewRecorder()
 		http.HandlerFunc(api.Page).ServeHTTP(recorder, request)
 		resp := recorder.Result()
-		defer resp.Body.Close()
+		defer func() { _ = resp.Body.Close() }()
 		body, err := io.ReadAll(resp.Body)
 		require.NoError(t, err)
 		require.Contains(t, string(body), `<div id="ip">&lt;script&gt;</div>`)
+	})
+
+	t.Run("respond with an error when the IP address can't be identified", func(t *testing.T) {
+		request := httptest.NewRequest(http.MethodGet, "/", nil)
+		request.RemoteAddr = ""
+		recorder := httptest.NewRecorder()
+		http.HandlerFunc(api.Page).ServeHTTP(recorder, request)
+		require.Equal(t, http.StatusInternalServerError, recorder.Code)
+		require.Equal(t, api.ErrNoIP.Error()+"\n", recorder.Body.String())
 	})
 }

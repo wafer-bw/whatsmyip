@@ -17,6 +17,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	reply, err := identifyIP(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	accept := strings.ToLower(r.Header.Get("accept"))
@@ -24,6 +25,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	contentType, body, err := marshalIP(accept, reply)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", contentType)
