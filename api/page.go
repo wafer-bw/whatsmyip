@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-//go:embed page.tmpl
+//go:embed _page.tmpl
 var pageTemplate string
 
 var page = template.Must(template.New("page").Parse(pageTemplate))
