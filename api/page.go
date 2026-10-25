@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+package api
+
+import (
+	"html/template"
+	"log"
+	"net/http"
+)
+
+// Page renders the homepage with the IP address of the request within the body
+// so the page doesn't have to call the API after it loads.
+func Page(w http.ResponseWriter, r *http.Request) {
+	reply, err := identifyIP(r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if err := page.Execute(w, reply); err != nil {
+		log.Printf("rendering page: %v", err)
+	}
+}
+
+var page = template.Must(template.New("page").Parse(`<!DOCTYPE html>
 
 <html lang="en">
 
@@ -14,7 +37,7 @@
     <div style="text-align: center;">
         <div>
             <h1><div><a href="https://github.com/wafer-bw/whatsmyip">wafer-bw/whatsmyip</a></div></h1>
-            <h2>Your public IP address is: <div id="ip"></div></h2>
+            <h2>Your public IP address is: <div id="ip">{{.Ip}}</div></h2>
             <div>
                 Golang <a href="/api">API</a> running as a <a href="https://vercel.com/docs/serverless-functions">Vercel Serverless Function</a> which returns your public IP address
             </div><br>
@@ -27,17 +50,7 @@
             </div>
         </div>
     </div>
-    <script>
-        fetch("/api", { headers: { 'accept': 'application/json' } })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("ip").innerHTML = data["ip"]
-            }).catch(err => {
-                msg = "There was a problem getting your IP address"
-                document.getElementById("ip").innerHTML = msg
-                console.error(err)
-            })
-    </script>
 </body>
 
 </html>
+`))

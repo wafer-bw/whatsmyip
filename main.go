@@ -27,7 +27,8 @@ func main() {
 	}
 
 	router := mux.NewRouter()
-	router.HandleFunc("/", api.Handler).Methods(http.MethodGet)
+	router.HandleFunc("/", api.Page).Methods(http.MethodGet)
+	router.HandleFunc("/api", api.Handler).Methods(http.MethodGet)
 
 	server := &http.Server{
 		Addr:         net.JoinHostPort(host, port),
