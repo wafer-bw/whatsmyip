@@ -36,8 +36,6 @@ make run
 make test
 # Run the API only
 make api
-# Update coverage badge
-make coverage
 # Update protobuf API contract
 make protoc
 # Run benchmarks
